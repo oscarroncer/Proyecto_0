@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+
+<Configura>
+
+ 
+
+  <Procedures>
+
+ 
+
+              <Procedimiento>           
+
+                            <RutaCaptura>c:\RutaCaptura</RutaCaptura>
+
+                            <Filtro>*.PDF</Filtro>
+
+                            <Borrado>true</Borrado>
+
+                            <RutaCopia>
+
+                                          <Ruta>c:\RutaDestino1</Ruta>
+
+                                          <Ruta>c:\RutaDestino2</Ruta>
+
+                            </RutaCopia>
+
+              </Procedimiento>
+
+</Procedures>
+
+</Configura>
