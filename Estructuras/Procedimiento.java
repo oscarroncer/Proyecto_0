@@ -1,15 +1,15 @@
 package Estructuras;
 
 import java.util.List;
-import java.nio.file.Path;
+import java.io.File;
 
 public class Procedimiento
 {
     //atributos de objeto procedimiento
-    Path RutaCaptura;
-    String Filtro = new String();
-    boolean Borrado;    //en java un boolean no inicializado es false por defecto
-    List<Path> RutaCopia;
+    public File RutaCaptura;
+    public String Filtro = new String();
+    public boolean Borrado;    //en java un boolean no inicializado es false por defecto
+    public List<File> RutaCopia;
 
     @Override
     public String toString()
@@ -20,5 +20,6 @@ public class Procedimiento
         +"\nRutas de copia: "+RutaCopia.toString();
     }
 
-    //pruebas de git
+
+
 }
