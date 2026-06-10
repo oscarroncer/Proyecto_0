@@ -16,29 +16,29 @@ public class Program{
 public static void main(String[] args) 
 {
     boolean leidoConExito = leerConfigure(); //Si no se ha cargado correctamente o no existe el fichero de configuración salimos del programa
-    System.out.println("Leido con exito: "+leidoConExito);
+    System.out.println("Leido con exito: "+ leidoConExito);
 }
 
 
 //comprobamos que existye y llamamos al cargarConfigure()
 public static  boolean  leerConfigure()
 {
-    File file = new File("C:\\Users\\Oscar\\OneDrive\\Escritorio\\PROYECTOS\\Proyecto_0\\configure.xml");
+    File file = new File(".\\configure.xml");
 
     if (file.exists()) 
     { 
 
-        return cargarConfigure("C:\\Users\\Oscar\\OneDrive\\Escritorio\\PROYECTOS\\Proyecto_0\\configure.xml"); //devuelve el resultado de cargar con exito o no
+        return cargarConfigure(file); //devuelve el resultado de cargar con exito o no
   
     }
 
     return false;
 }
 
-public static boolean cargarConfigure(String file)
+public static boolean cargarConfigure(File file)
 {
 
-    File configurePath = new File(file);
+    File configurePath = file;
     Configure configuracion = new Configure(); //aqui cargaremos la configuracion final
 
     //inicializamos el reader
@@ -71,17 +71,17 @@ public static boolean cargarConfigure(String file)
 
                     if (!texto.isEmpty()){
 
-                        switch (currentElement) {
+                        switch (currentElement.toUpperCase()) {
                             
-                            case "RutaCaptura": procedimientoCurrent.RutaCaptura = new File (texto);
+                            case "RUTACAPTURA": procedimientoCurrent.RutaCaptura = new File (texto);
                                 
                             break;
 
-                            case "Filtro": procedimientoCurrent.Filtro = texto;
+                            case "FILTRO": procedimientoCurrent.Filtro = texto;
                                 
                             break;
 
-                            case "Borrado":     //contemplamos solo dos casos true/false
+                            case "BORRADO":     //contemplamos solo dos casos true/false
                                 
                                 if(texto.toLowerCase().equals("true"))      
                                 {
@@ -94,7 +94,7 @@ public static boolean cargarConfigure(String file)
                                 
                             break;
 
-                            case "Ruta":
+                            case "RUTA":
 
                                 procedimientoCurrent.RutaCopia.add(new File(texto));
                             
@@ -109,7 +109,9 @@ public static boolean cargarConfigure(String file)
                     
                     if (currentElement.equals("Procedimiento")) 
                     {
-                        configuracion.procedimientos.add(procedimientoCurrent);
+                        Procedimiento p = procedimientoCurrent;
+                        
+                        configuracion.procedimientos.add(p);
                         procedimientoCurrent = null;
                     }
 

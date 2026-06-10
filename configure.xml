@@ -26,6 +26,23 @@
 
               </Procedimiento>
 
+              <Procedimiento>           
+
+                            <RutaCaptura>c:\RutaCaptura</RutaCaptura>
+
+                            <Filtro>*.jpg</Filtro>
+
+                            <Borrado>true</Borrado>
+
+                            <RutaCopia>
+
+                                          <Ruta>c:\RutaDestino1</Ruta>
+
+                                          <Ruta>c:\RutaDestino2</Ruta>
+
+                            </RutaCopia>
+
+              </Procedimiento>
 </Procedures>
 
 </Configura>
