@@ -15,19 +15,20 @@ public class Program{
 
 public static void main(String[] args) 
 {
-    leerConfigure(); //Si no se ha cargado correctamente o no existe el fichero de configuración salimos del programa
+    boolean leidoConExito = leerConfigure(); //Si no se ha cargado correctamente o no existe el fichero de configuración salimos del programa
+    System.out.println("Leido con exito: "+leidoConExito);
 }
 
 
 //comprobamos que existye y llamamos al cargarConfigure()
 public static  boolean  leerConfigure()
 {
-    File file = new File("./configura.xml");
+    File file = new File("C:\\Users\\Oscar\\OneDrive\\Escritorio\\PROYECTOS\\Proyecto_0\\configure.xml");
 
     if (file.exists()) 
     { 
 
-        return cargarConfigure("./configura.xml"); //devuelve el resultado de cargar con exito o no
+        return cargarConfigure("C:\\Users\\Oscar\\OneDrive\\Escritorio\\PROYECTOS\\Proyecto_0\\configure.xml"); //devuelve el resultado de cargar con exito o no
   
     }
 
@@ -37,14 +38,14 @@ public static  boolean  leerConfigure()
 public static boolean cargarConfigure(String file)
 {
 
-    File configure = new File(file);
+    File configurePath = new File(file);
     Configure configuracion = new Configure(); //aqui cargaremos la configuracion final
 
     //inicializamos el reader
     try 
     {
         XMLInputFactory factory = XMLInputFactory.newInstance();
-        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(configure));
+        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(configurePath));
         
         //variables current
         String currentElement = "";
@@ -93,9 +94,9 @@ public static boolean cargarConfigure(String file)
                                 
                             break;
 
-                            case "RutaCopia":
+                            case "Ruta":
 
-                                
+                                procedimientoCurrent.RutaCopia.add(new File(texto));
                             
                             break;
                         
@@ -106,8 +107,14 @@ public static boolean cargarConfigure(String file)
 
                 case XMLStreamConstants.END_ELEMENT:
                     
-                    currentElement = "";
+                    if (currentElement.equals("Procedimiento")) 
+                    {
+                        configuracion.procedimientos.add(procedimientoCurrent);
+                        procedimientoCurrent = null;
+                    }
 
+                    currentElement = "";
+                
                 break;
             
             }
@@ -115,10 +122,12 @@ public static boolean cargarConfigure(String file)
 
     } catch (Exception e) 
     {
-        System.out.println("Eror: "+e);
+        System.out.println("Eror: " + e);
+        
+        return false;
     }
 
-    return false;
+    return true;
 
 }
 
